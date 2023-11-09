@@ -15,13 +15,16 @@ import telas.*;
 
 public class Programa {
     private List<Filme> filmes;
-    private List<Genero> generos;
+    private static List<Genero> generos;
+    private List<Serie> series;
     private static final String FILMES_FILE = "filmes.txt";
     private static final String GENEROS_FILE = "generos.txt";
+    private static final String SERIES_FILE = "series.txt";
 
     public Programa() {
         filmes = new ArrayList<>();
         generos = new ArrayList<>();
+        series = new ArrayList<>();
     }
 
     public static void main(String[] args) {
@@ -29,8 +32,9 @@ public class Programa {
         	Programa app = new Programa();
             app.carregarGeneros();
             app.carregarFilmes();
+            app.carregarSeries();
 
-            JFrame frame = new TelaInicialFrame("Cadastro de Filmes", app);
+            JFrame frame = new TelaInicialFrame("MyMovies", app);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             centerFrame(frame); // Centraliza a janela
             frame.setVisible(true);
@@ -44,6 +48,15 @@ public class Programa {
 
     public List<Filme> getFilmes() {
         return filmes;
+    }
+
+    public void adicionarSerie(Serie serie) {
+        series.add(serie);
+        salvarSerieEmArquivo(serie, SERIES_FILE);
+    }
+
+    public List<Serie> getSeries() {
+        return series;
     }
 
     public void adicionarGenero(Genero genero) {
@@ -73,7 +86,7 @@ public class Programa {
                 }
 
                 if (genero != null) {
-                    filmes.add(new Filme(nome, genero, duracao, nota));
+                    filmes.add(new Filme(nome, nota, genero, duracao));
                 }
             }
             scanner.close();
@@ -81,6 +94,35 @@ public class Programa {
             System.out.println("Nenhum filme cadastrado.");
         }
     }
+
+    public void carregarSeries() {
+        try {
+            Scanner scanner = new Scanner(new File(SERIES_FILE));
+            while (scanner.hasNextLine()) {
+                String nome = scanner.nextLine();
+                String generoNome = scanner.nextLine();
+                int duracao = Integer.parseInt(scanner.nextLine());
+                double nota = Double.parseDouble(scanner.nextLine());
+
+                Genero genero = null;
+                for (Genero g : generos) {
+                    if (g.getNome().equals(generoNome)) {
+                        genero = g;
+                        break;
+                    }
+                }
+
+                if (genero != null) {
+                    series.add(new Serie(nome, nota, genero, duracao));
+                }
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Nenhum filme cadastrado.");
+        }
+    }
+
+
 
     public void carregarGeneros() {
         try {
@@ -99,6 +141,16 @@ public class Programa {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(nomeArquivo, true));
             writer.write(filme.toFileString());
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar o filme no arquivo.");
+        }
+    }
+
+    private void salvarSerieEmArquivo(Serie serie, String nomeArquivo) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(nomeArquivo, true));
+            writer.write(serie.toFileString());
             writer.close();
         } catch (IOException e) {
             System.out.println("Erro ao salvar o filme no arquivo.");
