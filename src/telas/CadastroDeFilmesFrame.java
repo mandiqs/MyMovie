@@ -67,7 +67,7 @@ public class CadastroDeFilmesFrame extends JFrame {
         add(filmesScrollPane);
 
         carregarFilmes();
-        setSize(700, 400);
+        setSize(790, 680);
         Programa.centerFrame(this); // Centraliza a janela
     }
 
@@ -96,7 +96,7 @@ public class CadastroDeFilmesFrame extends JFrame {
                 int duracao = Integer.parseInt(duracaoText);
                 double nota = Double.parseDouble(notaText);
 
-                Filme filme = new Filme(nome, genero, duracao, nota);
+                Filme filme = new Filme(nome, nota, genero, duracao);
                 app.adicionarFilme(filme);
                 nomeField.setText("");
                 duracaoField.setText("");
