@@ -16,10 +16,10 @@ import aplicacao.*;
 import entidades.Genero;
 
 public class CadastroDeGenerosFrame extends JFrame {
-    private Programa app;
-    private JTextField generoField;
-    private DefaultListModel<Genero> generoListModel;
-    private JList<Genero> generoList;
+        private Programa app;
+        private JTextField generoField;
+        private DefaultListModel<Genero> generoListModel;
+        private JList<Genero> generoList;
 
     public CadastroDeGenerosFrame(String title, Programa app) {
         super(title);
@@ -52,7 +52,7 @@ public class CadastroDeGenerosFrame extends JFrame {
         add(voltarButton);
 
         carregarGeneros();
-        setSize(400, 300);
+        setSize(610, 680);
         Programa.centerFrame(this); // Centraliza a janela
     }
 
