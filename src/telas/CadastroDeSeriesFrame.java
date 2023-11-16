@@ -1,6 +1,6 @@
 package telas;
 
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -12,6 +12,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
+
 import aplicacao.Programa;
 import entidades.Filme;
 import entidades.Genero;
@@ -30,13 +32,13 @@ public class CadastroDeSeriesFrame extends JFrame {
         super(title);
         this.app = app;
 
-        // Configurar os componentes da interface gráfica
+        // Componentes da interface gráfica
         nomeField = new JTextField(15);
         generoComboBox = new JComboBox<>(app.getGeneros().toArray(new Genero[0]));
         duracaoField = new JTextField(3);
         notaField = new JTextField(3);
 
-        JButton cadastrarSerieButton = new JButton("Cadastrar Serie");
+        JButton cadastrarSerieButton = new JButton("Cadastrar Série");
         JButton voltarButton = new JButton("Voltar");
 
         voltarButton.addActionListener(new ActionListener() {
@@ -53,7 +55,6 @@ public class CadastroDeSeriesFrame extends JFrame {
 
         JScrollPane seriesScrollPane = new JScrollPane(seriesTextArea);
 
-        // Layout
         setLayout(new FlowLayout());
         add(new JLabel("Nome da série:"));
         add(nomeField);
@@ -67,9 +68,42 @@ public class CadastroDeSeriesFrame extends JFrame {
         add(voltarButton);
         add(seriesScrollPane);
 
+
+        // Aumentando o tamanho dos botões
+        Dimension tamanhoBotao = new Dimension(150, 40);
+        cadastrarSerieButton.setPreferredSize(tamanhoBotao);
+        voltarButton.setPreferredSize(tamanhoBotao);
+
+
+        // Colocando cor nos botões
+        cadastrarSerieButton.setBackground(new Color(242, 18, 78));
+        voltarButton.setBackground(new Color(242, 18, 78));
+
+
+        // Colocando cor nas letras dos botões
+        cadastrarSerieButton.setForeground(Color.white);
+        voltarButton.setForeground(Color.white);
+
+
+        // Alterando a fonte dos botões
+        Font fonteBotao = new Font("Lucida Fax", Font.BOLD, 16);
+        cadastrarSerieButton.setFont(fonteBotao);
+        voltarButton.setFont(fonteBotao);
+
+
+        // Colocando bordas nos botões
+        cadastrarSerieButton.setBorder(new LineBorder(Color.WHITE, 4));
+        voltarButton.setBorder(new LineBorder(Color.WHITE, 4));
+
+
+        // Cor no plano de fundo
+        getContentPane().setBackground(new Color(253,213,1));
+
+
+
         carregarSeries();
-        setSize(755, 680);
-        Programa.centerFrame(this); // Centraliza a janela
+        setSize(770, 680);
+        Programa.centerFrame(this);
     }
 
     private void carregarSeries() {
@@ -110,9 +144,9 @@ public class CadastroDeSeriesFrame extends JFrame {
     }
 
     private void voltarParaTelaInicial() {
-        JFrame frame = new TelaInicialFrame("Cadastro de Séries", app);
+        JFrame frame = new TelaInicialFrame("MyMovies", app);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Programa.centerFrame(frame); // Centraliza a janela
+        Programa.centerFrame(frame);
         frame.setVisible(true);
         this.setVisible(false);
     }
