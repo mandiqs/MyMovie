@@ -2,7 +2,7 @@
 
 ## Estudo de Domínio para um Software de cadastro de Filmes, Séries e respectivos Gêneros.
 
-### Apresentação do problema
+### Apresentação da problemática
 A criação de um software de cadastro de filmes, séries e gêneros é motivada pela crescente demanda por uma solução eficiente e organizada para gerenciar informações relacionadas ao entretenimento cinematográfico. Tal sistema oferece benefícios significativos para entusiastas do setor. Abaixo estão algumas justificativas para a implementação desse software:
 
 1 - Organização e Acesso Rápido:
