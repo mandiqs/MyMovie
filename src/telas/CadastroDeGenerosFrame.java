@@ -1,6 +1,6 @@
 package telas;
 
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
+
 import aplicacao.*;
 import entidades.Genero;
 
@@ -28,7 +30,7 @@ public class CadastroDeGenerosFrame extends JFrame {
         generoListModel = new DefaultListModel<>();
         generoList = new JList<>(generoListModel);
 
-        // Configurar os componentes da interface gráfica
+        // Componentes da interface gráfica
         generoField = new JTextField(20);
 
         JButton cadastrarGeneroButton = new JButton("Cadastrar Gênero");
@@ -43,17 +45,48 @@ public class CadastroDeGenerosFrame extends JFrame {
 
         cadastrarGeneroButton.addActionListener(new CadastrarGeneroListener());
 
-        // Layout
+
         setLayout(new FlowLayout());
         add(new JLabel("Nome do Gênero:"));
         add(generoField);
-        add(cadastrarGeneroButton);
         add(new JScrollPane(generoList));
+        add(cadastrarGeneroButton);
         add(voltarButton);
+
+
+        // Aumentando o tamanho dos botões
+        Dimension tamanhoBotao = new Dimension(180, 40);
+        cadastrarGeneroButton.setPreferredSize(tamanhoBotao);
+        voltarButton.setPreferredSize(tamanhoBotao);
+
+
+        // Colocando cor nos botões
+        cadastrarGeneroButton.setBackground(new Color(242, 18, 78));
+        voltarButton.setBackground(new Color(242, 18, 78));
+
+
+        // Colocando cor nas letras dos botões
+        cadastrarGeneroButton.setForeground(Color.white);
+        voltarButton.setForeground(Color.white);
+
+
+        // Alterando fonte dos botões
+        Font fonteBotao = new Font("Lucida Fax", Font.BOLD, 16);
+        cadastrarGeneroButton.setFont(fonteBotao);
+        voltarButton.setFont(fonteBotao);
+
+        // Colocando bordas nos botões
+        cadastrarGeneroButton.setBorder(new LineBorder(Color.WHITE, 4));
+        voltarButton.setBorder(new LineBorder(Color.WHITE, 4));
+
+
+        // Cor do plano de fundo
+        getContentPane().setBackground(new Color(236,121,131));
+
 
         carregarGeneros();
         setSize(610, 680);
-        Programa.centerFrame(this); // Centraliza a janela
+        Programa.centerFrame(this);
     }
 
     private void carregarGeneros() {
@@ -79,9 +112,9 @@ public class CadastroDeGenerosFrame extends JFrame {
     }
 
     private void voltarParaTelaInicial() {
-        JFrame frame = new TelaInicialFrame("Cadastro de Filmes", app);
+        JFrame frame = new TelaInicialFrame("MyMovies", app);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Programa.centerFrame(frame); // Centraliza a janela
+        Programa.centerFrame(frame);
         frame.setVisible(true);
         this.setVisible(false);
     }
