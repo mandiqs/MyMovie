@@ -3,13 +3,23 @@ package entidades;
 public abstract class Video {
     private String nome;
     private double nota;
-    private String genero;
+    private Genero genero;
 
-    public Video(String nome, double nota, String genero) {
+    public Video(String nome, double nota, Genero genero) {
         this.nome = nome;
         this.nota = nota;
         this.genero = genero;
     }
+
+    public abstract void reproduzir();
+
+    public void exibirDetalhes() {
+        System.out.println("Detalhes do vídeo:");
+        System.out.println("Nome: " + nome);
+        System.out.println("Nota: " + nota);
+        System.out.println("Gênero: " + genero);
+    }
+
 
     public String getNome() {
         return nome;
@@ -27,11 +37,11 @@ public abstract class Video {
         this.nota = nota;
     }
 
-    public String getGenero() {
+    public Genero getGenero() {
         return genero;
     }
 
-    public void setGenero(String genero) {
+    public void setGenero(Genero genero) {
         this.genero = genero;
     }
 
