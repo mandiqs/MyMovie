@@ -36,7 +36,7 @@ public class Programa {
 
             JFrame frame = new TelaInicialFrame("MyMovies", app);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            centerFrame(frame); // Centraliza a janela
+            centerFrame(frame);
             frame.setVisible(true);
         });
     }
