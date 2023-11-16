@@ -1,6 +1,6 @@
 package telas;
 
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -12,6 +12,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
+
 import aplicacao.Programa;
 import entidades.Filme;
 import entidades.Genero;
@@ -29,7 +31,7 @@ public class CadastroDeFilmesFrame extends JFrame {
         super(title);
         this.app = app;
 
-        // Configurar os componentes da interface gráfica
+        // Componentes da interface gráfica
         nomeField = new JTextField(15);
         generoComboBox = new JComboBox<>(app.getGeneros().toArray(new Genero[0]));
         duracaoField = new JTextField(3);
@@ -52,7 +54,7 @@ public class CadastroDeFilmesFrame extends JFrame {
 
         JScrollPane filmesScrollPane = new JScrollPane(filmesTextArea);
 
-        // Layout
+
         setLayout(new FlowLayout());
         add(new JLabel("Nome do filme:"));
         add(nomeField);
@@ -66,9 +68,44 @@ public class CadastroDeFilmesFrame extends JFrame {
         add(voltarButton);
         add(filmesScrollPane);
 
+
+
+        // Aumentando o tamanho dos botões
+        Dimension tamanhoBotao = new Dimension(150, 40);
+        cadastrarFilmeButton.setPreferredSize(tamanhoBotao);
+        voltarButton.setPreferredSize(tamanhoBotao);
+
+
+        // Colocando cor nos botões
+        cadastrarFilmeButton.setBackground(new Color(242, 18, 78));
+        voltarButton.setBackground(new Color(242, 18, 78));
+
+
+        // Colocando cor nas letras dos botões
+        cadastrarFilmeButton.setForeground(Color.white);
+        voltarButton.setForeground(Color.white);
+
+
+        // Alterando fonte dos botões
+        Font fonteBotao = new Font("Lucida Fax", Font.BOLD, 16);
+        cadastrarFilmeButton.setFont(fonteBotao);
+        voltarButton.setFont(fonteBotao);
+
+
+        // Colocando bordas nos botões
+        cadastrarFilmeButton.setBorder(new LineBorder(Color.WHITE, 4));
+        voltarButton.setBorder(new LineBorder(Color.WHITE, 4));
+
+
+        // Cor do plano de fundo
+        getContentPane().setBackground(new Color(1,146,193));
+
+
+
+
         carregarFilmes();
         setSize(790, 680);
-        Programa.centerFrame(this); // Centraliza a janela
+        Programa.centerFrame(this);
     }
 
     private void carregarFilmes() {
@@ -109,9 +146,9 @@ public class CadastroDeFilmesFrame extends JFrame {
     }
 
     private void voltarParaTelaInicial() {
-        JFrame frame = new TelaInicialFrame("Cadastro de Filmes", app);
+        JFrame frame = new TelaInicialFrame("MyMovies", app);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Programa.centerFrame(frame); // Centraliza a janela
+        Programa.centerFrame(frame);
         frame.setVisible(true);
         this.setVisible(false);
     }
